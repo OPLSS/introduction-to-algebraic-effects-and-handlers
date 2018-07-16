@@ -15,9 +15,15 @@ handlers at the [Oregon programming languages summer school 2018
 
 Introduction to algebraic effects and handlers for programmers.
 
+Reading material: [An introduction to algebraic effects and
+handlers](http://www.eff-lang.org/handlers-tutorial.pdf) and [Programming with
+algebraic effects and handlers](https://arxiv.org/abs/1203.1539).
+
 ## Lecture 2: What is algebraic about algebraic effects and handlers?
 
-As a reference we shall use [Waht is algebraic about algebraic effects and handlers?](https://github.com/andrejbauer/what-is-algebraic-about-algebraic-effects), which will appear on arXiv shortly.
+As a reference we shall use [Waht is algebraic about algebraic effects and
+handlers?](https://github.com/andrejbauer/what-is-algebraic-about-algebraic-effects),
+which will appear on arXiv shortly.
 
 ## Lecture 3: Designing a programming language
 
@@ -25,6 +31,8 @@ As a reference we shall use [Waht is algebraic about algebraic effects and handl
 * Operational semantics
 * An effect system
 * Progress & preservation
+
+Reading material: [An effect system for algebraic effects and handlers](https://arxiv.org/abs/1306.6316).
 
 ## Lecture 4: Applications
 
