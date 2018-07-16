@@ -17,6 +17,7 @@ Introduction to algebraic effects and handlers for programmers.
 
 ## Lecture 2: What is algebraic about algebraic effects and handlers?
 
+As a reference we shall use [Waht is algebraic about algebraic effects and handlers?](https://github.com/andrejbauer/what-is-algebraic-about-algebraic-effects), which will appear on arXiv shortly.
 
 ## Lecture 3: Designing a programming language
 
