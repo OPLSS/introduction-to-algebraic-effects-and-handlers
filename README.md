@@ -11,7 +11,23 @@ handlers at the [Oregon programming languages summer school 2018
 * [Programming language Eff](http://www.eff-lang.org)
 * [Formalized proofs about Eff](https://github.com/matijapretnar/proofs/)
 
-## Lecture 1: Programming with algebraic effects and handlers
+## Lecture 1: What is algebraic about algebraic effects and handlers?
+
+As a reference we shall use [Waht is algebraic about algebraic effects and
+handlers?](https://github.com/andrejbauer/what-is-algebraic-about-algebraic-effects),
+which will appear on arXiv shortly.
+
+## Lecture 2: Designing a programming language
+
+* Syntax of core eff
+* Operational semantics
+* An effect system
+* Progress & preservation
+* Implementation
+
+Reading material: [An effect system for algebraic effects and handlers](https://arxiv.org/abs/1306.6316).
+
+## Lecture 4: Programming with algebraic effects and handlers
 
 Introduction to algebraic effects and handlers for programmers.
 
@@ -19,22 +35,8 @@ Reading material: [An introduction to algebraic effects and
 handlers](http://www.eff-lang.org/handlers-tutorial.pdf) and [Programming with
 algebraic effects and handlers](https://arxiv.org/abs/1203.1539).
 
-## Lecture 2: What is algebraic about algebraic effects and handlers?
-
-As a reference we shall use [Waht is algebraic about algebraic effects and
-handlers?](https://github.com/andrejbauer/what-is-algebraic-about-algebraic-effects),
-which will appear on arXiv shortly.
-
-## Lecture 3: Designing a programming language
-
-* Syntax of core eff
-* Operational semantics
-* An effect system
-* Progress & preservation
-
-Reading material: [An effect system for algebraic effects and handlers](https://arxiv.org/abs/1306.6316).
-
-## Lecture 4: Applications
-
+* State
+* Non-determinism and search
+* Transactional memory
 * Probabilistic programming
 * Cooperative multi-threading
