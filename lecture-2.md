@@ -14,7 +14,7 @@ from [Lecture 1](lecture-1.md).
 
 ## Reading material
 
-There are many possible ways and choices of designing a programming langauge
+There are many possible ways and choices of designing a programming language
 around algebraic operations and handlers, but we shall mostly rely on [An effect
 system for algebraic effects and handlers](https://arxiv.org/abs/1306.6316).
 
