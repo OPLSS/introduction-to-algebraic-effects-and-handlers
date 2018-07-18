@@ -9,16 +9,16 @@ of difficulty, either in terms of trickiness, the amount of work, or
 prerequisites. I recommend that you discuss the problems in groups, and pick
 whichever problems you find interesting.
 
-## General resources
-
-* [Effects bibliography](https://github.com/yallop/effects-bibliography)
-* [Effects Rosetta Stone](https://github.com/effect-handlers/effects-rosetta-stone)
-* [Programming language Eff](http://www.eff-lang.org)
-* [Formalized proofs about Eff](https://github.com/matijapretnar/proofs/)
-
 ## Lectures
 
 * [Lecture 1: What is algebraic about algebraic effects and handlers?](lecture-1.md)
 * [Lecture 2: Designing a programming language](lecture-2.md)
 * [Lecture 3: Equational reasoning](lecture-3.md)
 * [Lecture 4: Programming with algebraic effects and handlers](lecture-4.md)
+
+## General resources
+
+* [Effects bibliography](https://github.com/yallop/effects-bibliography)
+* [Effects Rosetta Stone](https://github.com/effect-handlers/effects-rosetta-stone)
+* [Programming language Eff](http://www.eff-lang.org)
+* [Formalized proofs about Eff](https://github.com/matijapretnar/proofs/)
