@@ -9,14 +9,18 @@ of difficulty, either in terms of trickiness, the amount of work, or
 prerequisites. I recommend that you discuss the problems in groups, and pick
 whichever problems you find interesting.
 
-## Lectures
+# Lectures
 
-* [Lecture 1: What is algebraic about algebraic effects and handlers?](lecture-1.md)
-* [Lecture 2: Designing a programming language](lecture-2.md)
-* [Lecture 3: Equational reasoning](lecture-3.md)
-* [Lecture 4: Programming with algebraic effects and handlers](lecture-4.md)
+* [What is algebraic about algebraic effects and handlers?](lectures-1-2-3.md)
+  (lectures 1, 2, and 3)
 
-## General resources
+* [Designing a programming language](lecture-3.md)
+  (lecture 3)
+
+* [Programming with algebraic effects and handlers](lecture-4.md)
+  (lecture 4)
+
+# General resources & reading material
 
 * [Effects bibliography](https://github.com/yallop/effects-bibliography)
 * [Effects Rosetta Stone](https://github.com/effect-handlers/effects-rosetta-stone)

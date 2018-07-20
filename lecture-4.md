@@ -1,4 +1,4 @@
-# Lecture 4: Programming with algebraic effects and handlers
+# Programming with algebraic effects and handlers
 
 In the last lecture we shall explore how algebraic operations and handlers can
 be used in programming.

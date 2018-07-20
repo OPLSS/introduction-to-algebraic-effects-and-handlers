@@ -1,4 +1,4 @@
-# Lecture 1: What is algebraic about algebraic effects and handlers?
+# What is algebraic about algebraic effects and handlers?
 
 The purpose of the first lecture is to review algebraic theories and related
 concepts, and connect them with computational effects. We shall start on the
