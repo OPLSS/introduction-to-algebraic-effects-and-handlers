@@ -49,11 +49,11 @@ Value:
 
 Handler:
 
-    h ::= handler { return x ↦ c_ret, ... opᵢ(x) κ ↦ c_i, ... }
+    h ::= handler { return x ↦ c_ret, ... opᵢ(x, κ) ↦ c_i, ... }
 
 Computation:
 
-q    c ::= return v               (pure computation)
+    c ::= return v               (pure computation)
         | if v then c₁ else c₂   (conditional)
         | v₁ v₂                  (application)
         | with v handle c        (handling)
@@ -69,7 +69,7 @@ We introduce **generic operations** as syntactic abbreviation and let
 We provide small-step semantics, but big step semantics can also be given (see
 reading material). In the rules below `h` stands for
 
-    handler { return x ↦ c_ret, ... opᵢ(x) κ ↦ c_i, ... }
+    handler { return x ↦ c_ret, ... opᵢ(x,y) ↦ cᵢ, ... }
 
 We write `e₁[e₂/x]` for `e₁` with `e₂` substituted for `x`. The operational rules are:
 
@@ -86,11 +86,11 @@ We write `e₁[e₂/x]` for `e₁` with `e₂` substituted for `x`. The operatio
     
     
     _____________________________________
-    with h handle return v  ↦  c_ret[V/X]
+    with h handle return v  ↦  c_ret[v/x]
     
     
-    __________________________________________________________
-    with h handle opᵢ v  ↦  cᵢ[v/x, (λ x . with h handle κ x)/κ]
+    _____________________________________________________________
+    with h handle opᵢ(v,κ)  ↦  cᵢ[v/x, (λ x . with h handle κ x)/y]
     
     
     _________________________________
@@ -161,7 +161,7 @@ Rules for value typing:
     
     
     Γ, x : A ⊢ c_ret : B!Θ
-    Γ, x : Pᵢ, κ : Aᵢ → B!Θ ⊢ c_i : B!Θ  (for each opᵢ : Pᵢ ↝ Aᵢ)
+    Γ, x : Pᵢ, κ : Aᵢ → B!Θ ⊢ c_i : B!Θ  (for each opᵢ : Pᵢ ↝ Aᵢ in Δ)
     _______________________________________________________________________
     Γ ⊢ (handler { return x ↦ c_ret, ... opᵢ(x) κ ↦ c_i, ... }) : A!Δ ⇒ B!Θ
     
@@ -211,7 +211,7 @@ Rules for computation typing:
 
 If `⊢ c : A!Δ` then:
 
-1. **either** `c = return v` for some `⊢ v : A` **or**
+1. `c = return v` for some `⊢ v : A` **or**
 2. `c = op(v, κ)` for some `op ∈ Δ` and some value `v` and continuation `κ`, **or**
 3. `c ↦ c'` for some `⊢ c' : A!Δ`.
 
