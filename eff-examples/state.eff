@@ -1,0 +1,35 @@
+(** State *)
+
+effect Get: int
+effect Set: int -> unit
+
+(* The standard state handler. *)
+let state' = handler
+  | y -> (fun _ -> y)
+  | effect Get k -> (fun s -> k s s)
+  | effect (Set s') k -> (fun _ -> k () s')
+;;
+
+let example1 () =
+  let f =
+    (with state' handle
+      let x = perform (Get ()) in
+      perform (Set (2 * x)) ;
+      perform (Get ()) + 10)
+  in
+  f 30
+;;
+
+(* Better state handler, using finally clause *)
+let state initial = handler
+  | y -> (fun _ -> y)
+  | effect Get k -> (fun s -> k s s)
+  | effect (Set s') k -> (fun _ -> k () s')
+  | finally f -> f initial
+;;
+
+let example2 () =
+  with state 30 handle
+    let x = perform (Get ()) in
+    perform (Set (2 * x)) ;
+    perform Get + 10

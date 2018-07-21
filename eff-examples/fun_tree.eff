@@ -1,0 +1,42 @@
+(** This code is compatible with Eff 5.0, see http://www.eff-lang.org *)
+
+(** We show that with algebraic effects and handlers a total functional
+    [(int -> bool) -> bool] has a tree representation. *)
+
+(* A tree representation of a functional. *)
+type tree =
+  | Answer of bool
+  | Question of int * tree * tree
+
+(** Convert a tree to a functional. *)
+let rec tree2fun t a =
+  match t with
+  | Answer y -> y
+  | Question (x, t1, t2) -> tree2fun (if a x then t1 else t2) a
+
+(** An effect that we will use to report how the functional is using its argument. *)
+effect Report : int -> bool
+
+(** Convert a functional to a tree. *)
+let rec fun2tree h =
+  handle
+    Answer (h (fun x -> perform (Report x)))
+  with
+  | effect (Report x) k -> Question (x, k false, k true)
+
+let example1 = fun2tree (fun a -> true)
+
+let example2 = fun2tree (fun a -> a 10; true)
+
+let example3 = fun2tree (fun a -> if a 10 then (a 30 || a 15) else (a 20 && not (a 8)))
+
+(* This one is pretty large, so take care *)
+(*
+let example4 =
+  (* convert a string of booleans to an int *)
+  let rec to_int = function
+    | [] -> 0
+    | b :: bs -> (if b then 1 else 0) + 2 * to_int bs
+  in
+  fun2tree (fun a -> a (to_int [a 0; a 1; a 2; a 3; a 4; a 5; a 6; a 7; a 8]))
+ *)

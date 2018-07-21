@@ -1,0 +1,13 @@
+effect Abort : unit -> empty
+
+let example b =
+  handle
+    let x = 7 in
+    let y = 8 in
+    if b then
+      (match perform (Abort ()) with)
+    else
+      x + y
+  with
+  | v -> v + 20
+  | effect (Abort ()) k -> 42
