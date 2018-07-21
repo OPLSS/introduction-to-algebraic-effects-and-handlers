@@ -6,25 +6,19 @@ be used in programming.
 ## Eff
 
 There are several languages that support algebraic effects and handlers. The
-ones most faithful to the theory of algebraic effects are
-[Eff](http://www.eff-lang.org) and the [multicore
-OCaml](https://github.com/ocamllabs/ocaml-multicore). They have very similar
-syntax, and we could use either, but let us use Eff, just because it was the
-first language with algebraic effects and handlers.
+ones most faithful to the theory of algebraic effects are [Eff](http://www.eff-lang.org) and the [multicore
+OCaml](https://github.com/ocamllabs/ocaml-multicore). They have very similar syntax, and we could use either, but let us use
+Eff, just because it was the first language with algebraic effects and handlers.
 
-You can [run Eff in your browser](http://www.eff-lang.org/try/) or [install
-it](https://github.com/matijapretnar/eff/#installation--usage) locally. The page
-also has a quick overview of the syntax of Eff, which mimics the syntax of
-OCaml.
+You can [run Eff in your browser](http://www.eff-lang.org/try/) or [install it](https://github.com/matijapretnar/eff/#installation--usage) locally. The page also has a quick
+overview of the syntax of Eff, which mimics the syntax of OCaml.
 
 
 ## Reading material
 
-We shall draw on examples from [An introduction to algebraic effects and
-handlers](http://www.eff-lang.org/handlers-tutorial.pdf) and [Programming with
-algebraic effects and handlers](https://arxiv.org/abs/1203.1539). Some examples
-can be seen also at the [Effects Rosetta
-Stone](https://github.com/effect-handlers/effects-rosetta-stone).
+We shall draw on examples from [An introduction to algebraic effects and handlers](http://www.eff-lang.org/handlers-tutorial.pdf)
+and [Programming with algebraic effects and handlers](https://arxiv.org/abs/1203.1539). Some examples can be seen
+also at the [Effects Roset Stone](https://github.com/effect-handlers/effects-rosetta-stone).
 
 
 ## Basic examples
@@ -61,7 +55,7 @@ look at one such handler.
 
 Ambivalent choice is a computational effect which works as follows. There is an
 exception `Fail : unit → empty` which signifies failure to compute successfully,
-and an operation `Choose : α list → α`, which returns one of the elements of the
+and an operation `Select : α list → α`, which returns one of the elements of the
 list. It has to do return an element such that the subsequent computation does
 *not* fail (if possible).
 
@@ -77,7 +71,7 @@ in [thread.eff](eff-examples/thread.eff).
 
 ## Tree representation of a functional
 
-Let us do same game semantics! Suppose we have a **functional**
+Suppose we have a **functional**
 
     h : (int → bool) → bool
 
@@ -109,8 +103,9 @@ Given such a tree, we can recreate the functional `h`:
       | Question (x, t1, t2) -> tree2fun (if f x then t1 else t2) f
 
 Can we go backwards? Given `h`, how do we get the tree? It turns out this is not
-possible in a purely functional setting, but it is with computational effects.
-You can see how to do it with handlers in [fun_tree.eff](./eff-examples/fun_tree.eff).
+possible in a purely functional setting in general (but is possible for out
+specific case, Google "impossible functionals"), but it is with computational
+effects. You can see how to do it with handlers in [fun_tree.eff](./eff-examples/fun_tree.eff).
 
 # Problems
 
@@ -120,14 +115,13 @@ Implement the *breadth-first search* strategy for ambivalent choice.
 
 ## Problem: Monte Carlo sampling
 
-The [online Eff](http://www.eff-lang.org/try/) page has an example showing a
-handler which modifies a probabilistic computation (one that uses randomness) to
-one that computes the *distribution* of results. The handler computes the
-distribution in an exhaustive way that quickly leads to inefficiency.
+The [online Eff](http://www.eff-lang.org/try/) page has an example showing a handler which modifies a
+probabilistic computation (one that uses randomness) to one that computes the
+*distribution* of results. The handler computes the distribution in an exhaustive
+way that quickly leads to inefficiency.
 
-Improve it by implement a [Monte
-Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method) handler for estimating
-distributions of probabilistic computations.
+Improve it by implement a [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method) handler for estimating distributions of
+probabilistic computations.
 
 ## Problem: recursive cows
 

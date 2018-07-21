@@ -10,4 +10,4 @@ let example b =
       x + y
   with
   | v -> v + 20
-  | effect (Abort ()) k -> 42
+  | effect (Abort ()) _ -> 42

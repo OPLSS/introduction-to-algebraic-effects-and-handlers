@@ -17,7 +17,7 @@ let available x qs =
 ;;
 
 (* Solve the queens problem by guessing what to do *)
-let queens n =
+let queens () =
   let rec place x qs =
     if x = 9 then
       qs
@@ -38,7 +38,23 @@ let dfs = handler
      tryem lst
 ;;
 
+(* A handler for ambivalent choice which uses depth-first search *)
+let dfs_all = handler
+  | v -> [v]
+  | effect (Select lst) k ->
+     let rec tryem = function
+       | [] -> []
+       | x::xs -> (handle k x with
+                   | lst -> lst @ (tryem xs)
+                   | effect (Fail ()) _ -> tryem xs)
+     in
+     tryem lst
+;;
+
 (* And we can solve the problem: *)
 let solution =
-  with dfs handle queens 8
+  with dfs handle queens ()
 ;;
+
+let all_solutions =
+  with dfs_all handle queens ()

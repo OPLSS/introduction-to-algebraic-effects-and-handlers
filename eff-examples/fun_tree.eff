@@ -24,14 +24,13 @@ let rec fun2tree h =
   with
   | effect (Report x) k -> Question (x, k false, k true)
 
-let example1 = fun2tree (fun a -> true)
+let example1 = fun2tree (fun f -> true)
 
-let example2 = fun2tree (fun a -> a 10; true)
+let example2 = fun2tree (fun f -> f 10; true)
 
-let example3 = fun2tree (fun a -> if a 10 then (a 30 || a 15) else (a 20 && not (a 8)))
+let example3 = fun2tree (fun f -> if f 10 then (f 30 || f 15) else (f 20 && not (f 8)))
 
 (* This one is pretty large, so take care *)
-(*
 let example4 =
   (* convert a string of booleans to an int *)
   let rec to_int = function
@@ -39,4 +38,3 @@ let example4 =
     | b :: bs -> (if b then 1 else 0) + 2 * to_int bs
   in
   fun2tree (fun a -> a (to_int [a 0; a 1; a 2; a 3; a 4; a 5; a 6; a 7; a 8]))
- *)

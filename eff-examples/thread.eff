@@ -1,18 +1,20 @@
 (* This example is described in Section 6.10 of "Programming with Algebraic Effects and
    Handlers" by A. Bauer and M. Pretnar. *)
 
-effect Yield : unit
-effect Spawn : (unit -> unit) -> unit
+type thread = unit -> unit
+
+effect Yield : unit -> unit
+effect Spawn : thread -> unit
 
 (* We will need a queue to keep track of inactive threads.
    We implement the queue as state. *)
 
-effect Dequeue : unit -> (unit -> unit) option
-effect Enqueue : (unit -> unit) -> unit
+effect Dequeue : unit -> thread option
+effect Enqueue : thread -> unit
 
 (* The queue handler *)
 let queue initial = handler
-  | effect Dequeue k ->
+  | effect (Dequeue ()) k ->
     (fun queue -> match queue with
        | [] -> k None []
        | hd::tl -> k (Some hd) tl)
@@ -23,18 +25,15 @@ let queue initial = handler
 
 (* Round-robin thread scheduler. It is an example of a recursively defined handler. *)
 let round_robin =
-  let dequeue () =
-    match perform Dequeue with
+  let dequeue_thread () =
+    match perform (Dequeue ()) with
     | None -> ()
     | Some t -> t ()
   in
   let rec h () = handler
-    | effect Yield k -> perform (Enqueue k) ; dequeue ()
+    | effect Yield k -> perform (Enqueue k) ; dequeue_thread ()
     | effect (Spawn t) k -> perform (Enqueue k) ; with h () handle t ()
-    | () ->
-       (match perform (Dequeue ()) with
-        | None -> ()
-        | Some t -> t ())
+    | () -> dequeue_thread ()
   in
   h ()
 ;;
@@ -42,14 +41,14 @@ let round_robin =
 (* An example of nested multithreading. We have a thread which prints
    the letter a and another one which has two sub-threads printing x and y. *)
 
+let print_list lst =
+  iter (fun x -> perform (Print x) ; perform Yield) lst
+;;
+
 with queue [] handle
 with round_robin handle
- perform (Spawn (fun _ ->
-  iter (fun x -> perform (Print x); perform Yield) ["a"; "b"; "c"; "d"; "e"]
-  ));
- perform (Spawn (fun _ ->
-  iter (fun x -> perform (Print x); perform Yield) ["A"; "B"; "C"; "D"; "E"]
-  ))
+ perform (Spawn (fun _ -> print_list ["a"; "b"; "c"; "d"; "e"])) ;
+ perform (Spawn (fun _ -> print_list ["A"; "B"; "C"; "D"; "E"]))
 ;;
 
 
@@ -76,5 +75,5 @@ let rec fractions d e =
 
 with queue [] handle
 with round_robin handle
- fractions 1 10
+ fractions 1 100
 ;;

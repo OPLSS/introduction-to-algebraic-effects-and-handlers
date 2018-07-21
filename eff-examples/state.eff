@@ -1,13 +1,13 @@
 (** State *)
 
-effect Get: int
-effect Set: int -> unit
+effect Get : unit -> int
+effect Set : int -> unit
 
 (* The standard state handler. *)
 let state' = handler
-  | y -> (fun _ -> y)
-  | effect Get k -> (fun s -> k s s)
-  | effect (Set s') k -> (fun _ -> k () s')
+  | v -> (fun _ -> v)
+  | effect (Get ()) k -> (fun s -> (k s) s)
+  | effect (Set s') k -> (fun _ -> (k ()) s')
 ;;
 
 let example1 () =
